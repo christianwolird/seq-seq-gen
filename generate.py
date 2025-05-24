@@ -1,52 +1,63 @@
-# Load previous terms and generate new ones.
+import sys
 
 
-# File with sequence terms.
-f_name = 'sequence.txt'
 
-# Number of terms to calculate up to.
-num_terms = 500
+# ----------------------------
+#      Argument Parsing
+# ----------------------------
 
-# Progression of length 'n' and spacing 'n' starting at 'x'.
-# Presented as a 'range' object for "C optimization".
-def progression(x, n):
-    return range(x, x + n**2, n)
+if len(sys.argv) < 2:
+    print('Usage: python generate.py <target amount of terms>')
+    sys.exit(1)
 
-# To store progressions of previous terms.
+num_terms = int(sys.argv[1])
+
+
+
+# ----------------------------
+#     Reload Progressions
+# ----------------------------
+
+print('Loading previous progressions...')
+
+seq_file_name = 'sequence.txt'
 used_values = set()
+n = 0
 
 # Load previously calculated terms and their progressions.
-with open(f_name) as seq_file_read:
+with open(seq_file_name) as seq_file_read:
     for line in seq_file_read:
         # File format is "<index> <term>".
         n, x = line.strip().split()
         n, x = int(n), int(x)
-        used_values.update(progression(x,n))
+        used_values.update(range(x, x + n**2, n))
 
+print('Loading complete.')
+
+
+
+# ----------------------------
+#     Generate New Terms
+# ----------------------------
+
+print(f'Generating terms {n+1} through {num_terms}...')
 
 # Re-open file for appending.
-with open(f_name, 'a') as seq_file_append:
-    # Set 'n' to the last term and increment each loop.
+with open(seq_file_name, 'a') as seq_file_append:
+    # Set 'n' to the last known term and increment each loop.
     for n in range(n + 1, num_terms + 1):
-        # Always start at x=1 to search for the next term.
         x = 1
         while True:
-            # Check for collisions.
-            if any(y in used_values for y in progression(x, n)):
-                # Try incrementing 'x' (the greedy choice).
-                x +=1
+            prog = list(range(x, x + n**2, n))
+
+            if any(y in used_values for y in prog):
+                x += 1
                 continue
             
-            # Add this progression to the used values.
-            used_values.update(progression(x,n))
-
-            # Add the first term to the sequence text file.
+            used_values.update(prog)
             seq_file_append.write(f'{n} {x}\n')
-
-            # Flush to see updates in real time.
             seq_file_append.flush()
 
-            # Move to the next term.
-            n += 1
             break
 
+print('Done.')
