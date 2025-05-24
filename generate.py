@@ -5,7 +5,7 @@
 f_name = 'sequence.txt'
 
 # Number of terms to calculate up to.
-num_terms = 100
+num_terms = 500
 
 # Progression of length 'n' and spacing 'n' starting at 'x'.
 # Presented as a 'range' object for "C optimization".
