@@ -22,5 +22,9 @@ print('Plotting...')
 
 plt.scatter(indices, seq, s=3, c='blue')
 plt.title('Sequoia Sequence')
+
+plt.xscale('log')
+plt.yscale('log')
+
 plt.show()
 
