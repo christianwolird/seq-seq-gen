@@ -49,11 +49,11 @@ The sequence begins:
 Equivalently, the first few trees are:
 
 ```text
-n = 1, a(1) = 1   ->  1
-n = 2, a(2) = 2   ->  2, 4
-n = 3, a(3) = 3   ->  3, 6, 9
-n = 4, a(4) = 7   ->  7, 11, 15, 19
-n = 5, a(5) = 8   ->  8, 13, 18, 23, 28
+n = 1, a(1) = 1   →  1
+n = 2, a(2) = 2   →  2, 4
+n = 3, a(3) = 3   →  3, 6, 9
+n = 4, a(4) = 7   →  7, 11, 15, 19
+n = 5, a(5) = 8   →  8, 13, 18, 23, 28
 ```
 
 ## Goal
@@ -136,7 +136,7 @@ The scaling table shows how much slower each method became when the requested te
 
 | Transition | Python set | Rust dense bitmap | Rust chunked bitmap |
 |---:|---:|---:|---:|
-| 32 -> 64 | 15.6x | 15.5x | 16.2x |
-| 64 -> 128 | 21.2x | 14.8x | 15.9x |
-| 128 -> 256 | 21.9x | 17.5x | 25.4x |
-| 256 -> 512 | 26.8x | 21.6x | 29.5x |
+| 32 → 64 | 15.6x | 15.5x | 16.2x |
+| 64 → 128 | 21.2x | 14.8x | 15.9x |
+| 128 → 256 | 21.9x | 17.5x | 25.4x |
+| 256 → 512 | 26.8x | 21.6x | 29.5x |
