@@ -9,9 +9,12 @@ These benchmarks generate terms from scratch. They do not read or write
 python tests/python_set_bench.py 100
 ```
 
-This times the plain Python `set` method used by the main generator.
+This measures the speed of using Python set membership to check for tangles 
+(branches at the same height).
 
 ## Rust Bitmaps
+
+Alternatively, we can measure the speed of Rust bitmaps.
 
 Compile once:
 
