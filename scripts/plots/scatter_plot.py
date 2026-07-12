@@ -1,7 +1,9 @@
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 
-seq_file_name = '../sequence.txt'
+repo_root = Path(__file__).resolve().parents[2]
+seq_file_name = repo_root / 'results' / 'sequence.txt'
 
 seq = []
 indices = []
@@ -23,4 +25,3 @@ print('Plotting...')
 plt.scatter(indices, seq, s=3, c='blue')
 plt.title('Sequoia Sequence')
 plt.show()
-

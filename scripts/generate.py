@@ -1,4 +1,5 @@
 import sys
+from pathlib import Path
 
 
 
@@ -20,7 +21,9 @@ num_terms = int(sys.argv[1])
 
 print('Loading previous progressions...')
 
-seq_file_name = 'sequence.txt'
+repo_root = Path(__file__).resolve().parent.parent
+seq_file_name = repo_root / 'results' / 'sequence.txt'
+seq_file_name.parent.mkdir(parents=True, exist_ok=True)
 used_values = set()
 n = 0
 
@@ -39,6 +42,10 @@ print('Loading complete.')
 # ----------------------------
 #     Generate New Terms
 # ----------------------------
+
+if num_terms <= n:
+    print(f'Sequence already has {n} terms.')
+    sys.exit(0)
 
 print(f'Generating terms {n+1} through {num_terms}...')
 
