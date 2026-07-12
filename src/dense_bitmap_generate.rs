@@ -2,6 +2,7 @@ use std::env;
 use std::fs::{File, OpenOptions};
 use std::io::{BufRead, BufReader, Seek, SeekFrom, Write};
 use std::path::Path;
+use std::time::Instant;
 
 fn dense_get(words: &[u64], bit: usize) -> bool {
     let word = bit / 64;
@@ -136,6 +137,7 @@ fn main() -> std::io::Result<()> {
         .open(&seq_file)?;
 
     for n in (loaded_terms + 1)..=target_terms {
+        let term_start = Instant::now();
         let mut x = 1_usize;
 
         loop {
@@ -155,6 +157,9 @@ fn main() -> std::io::Result<()> {
 
             mark_progression(&mut used_words, n, x);
             append_term(&mut file, n, x)?;
+
+            let seconds = term_start.elapsed().as_secs_f64();
+            println!("Sequoia({n}) = {x}  [{seconds:.1}s]");
             break;
         }
     }
