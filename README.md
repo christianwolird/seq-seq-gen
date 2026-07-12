@@ -76,12 +76,12 @@ The current generator is a straightforward greedy implementation.
 
 For each `n`, it tests candidate starting heights `x = 1, 2, 3, ...` until it finds one whose full arithmetic progression does not intersect the set of already used branch heights.
 
-The used branch heights are tracked in a Python `set`, which makes collision checks fast despite the simplicity of the algorithm.
+The `scripts/generate.py` entry point compiles and runs a Rust dense-bitmap generator. Used branch heights are stored in a growing `Vec<u64>` bitmap, which keeps collision checks fast while preserving the same greedy search.
 
 Run:
 
 ```bash
-python scripts/generate.py <target number of terms>
+python3 scripts/generate.py <target number of terms>
 ```
 
 The generated terms are written to:
@@ -116,19 +116,27 @@ results/                             Generated sequence data
 results/backups/                     Backups of previous generated data
 ```
 
-## Algorithm Notes
+## Timing Benchmarks
 
 Single-run benchmark timings on the author's desktop PC:
 
+All three benchmarked versions use the same greedy search; the difference is only how they store and check previously used branch heights.
+
 | Terms | Python set | Rust dense bitmap | Rust chunked bitmap |
 |---:|---:|---:|---:|
-| 16 | 0.0004s | 0.0000s | 0.0001s |
 | 32 | 0.0056s | 0.0002s | 0.0009s |
 | 64 | 0.0876s | 0.0031s | 0.0146s |
 | 128 | 1.8557s | 0.0458s | 0.2315s |
 | 256 | 40.6220s | 0.7996s | 5.8836s |
-| 512 | not run | 17.2664s | not run |
+| 512 | 1087.6581s | 17.2664s | 173.7632s |
 
-## Status
+Transition scaling factors:
 
-This project is experimental. The priority is generating more correct terms so there is enough data to inspect for structure, growth behavior, and other patterns.
+The scaling table shows how much slower each method became when the requested term count doubled.
+
+| Transition | Python set | Rust dense bitmap | Rust chunked bitmap |
+|---:|---:|---:|---:|
+| 32 -> 64 | 15.6x | 15.5x | 16.2x |
+| 64 -> 128 | 21.2x | 14.8x | 15.9x |
+| 128 -> 256 | 21.9x | 17.5x | 25.4x |
+| 256 -> 512 | 26.8x | 21.6x | 29.5x |
