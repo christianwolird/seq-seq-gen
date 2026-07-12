@@ -110,30 +110,24 @@ means `a(10) = 60`.
 scripts/generate.py                  Main sequence generator
 scripts/plots/scatter_plot.py        Scatter plot helper
 scripts/plots/log_scatter_plot.py    Log scatter plot helper
+tests/python_set_bench.py            Python set benchmark
+tests/rust/rust_bitmap_bench.rs      Rust bitmap benchmarks
 results/                             Generated sequence data
 results/backups/                     Backups of previous generated data
 ```
 
 ## Algorithm Notes
 
-The core task is collision detection.
+Single-run benchmark timings on the author's desktop PC:
 
-For each candidate `x` and tree index `n`, the generator checks whether any value in
-
-```text
-x, x + n, x + 2n, ..., x + (n - 1)n
-```
-
-has already appeared in an earlier tree's branch progression.
-
-A Python `set` performs surprisingly well because this workload is dominated by integer membership tests. Future implementation work should be judged by whether it helps generate more correct terms, not by mathematical elegance alone.
-
-Possible directions include:
-
-- dense bitsets;
-- roaring bitmaps;
-- lower-level implementations in Rust or C++;
-- residue-class methods, if they prove faster in practice.
+| Terms | Python set | Rust dense bitmap | Rust chunked bitmap |
+|---:|---:|---:|---:|
+| 16 | 0.0004s | 0.0000s | 0.0001s |
+| 32 | 0.0056s | 0.0002s | 0.0009s |
+| 64 | 0.0876s | 0.0031s | 0.0146s |
+| 128 | 1.8557s | 0.0458s | 0.2315s |
+| 256 | 40.6220s | 0.7996s | 5.8836s |
+| 512 | not run | 17.2664s | not run |
 
 ## Status
 
