@@ -45,11 +45,7 @@ python3 scripts/plotting/direct_scatter_plot.py --log --output docs/images/direc
 
 ## Normalized Scatter Plot
 
-Plots residuals after subtracting a conjectural growth term:
-
-```text
-a(n) - c * n^3 / log(n)
-```
+Plots residuals after subtracting a conjectural growth term `a(n) - c * n^3 / log(n)`
 
 ```bash
 python3 scripts/plotting/normalized_scatter_plot.py
