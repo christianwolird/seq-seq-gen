@@ -110,6 +110,8 @@ For example:
 
 ```text
 10 60
+11 82
+12 83
 ```
 
 means `a(10) = 60`.
@@ -119,9 +121,9 @@ means `a(10) = 60`.
 ```text
 .
 ├── scripts/
-│   ├── generate.py
-│   └── plotting/
-├── tests/
-└── results/
-    └── backups/
+│   ├── generate.py       Main sequence generator entry point
+│   └── plotting/         Various plotting scripts
+├── tests/                Rust vs Python benchmark scripts
+└── results/              Generated sequence data
+    └── backups/          Backups of previous generated data
 ```
