@@ -1,4 +1,4 @@
-# Plot Scripts
+# Plotting Scripts
 
 These scripts read the sequoia sequence from:
 
