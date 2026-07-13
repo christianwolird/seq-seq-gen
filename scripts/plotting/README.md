@@ -14,7 +14,13 @@ Each input line is expected to have the format:
 
 Run each script from the repository root.
 
+Each plotting script can either open an interactive window or save directly to
+an image file. To save a plot, pass `--output <path>`. Parent directories are
+created automatically. Saved images use a 16:9 1920x1080 canvas.
+
 ## Direct Scatter Plot
+
+![Direct scatter plot](../../docs/images/direct_scatter.png)
 
 ```bash
 python3 scripts/plotting/direct_scatter_plot.py
@@ -24,11 +30,22 @@ Plots the sequence terms directly as `(n, a(n))`.
 
 By default, both axes are linear. To use a log-log view:
 
+![Log-log direct scatter plot](../../docs/images/direct_scatter_log.png)
+
 ```bash
 python3 scripts/plotting/direct_scatter_plot.py --log
 ```
 
+To save either version:
+
+```bash
+python3 scripts/plotting/direct_scatter_plot.py --output docs/images/direct_scatter.png
+python3 scripts/plotting/direct_scatter_plot.py --log --output docs/images/direct_scatter_log.png
+```
+
 ## Normalized Scatter Plot
+
+![Normalized scatter plot](../../docs/images/normalized_scatter.png)
 
 ```bash
 python3 scripts/plotting/normalized_scatter_plot.py
@@ -52,14 +69,28 @@ To provide a different constant:
 python3 scripts/plotting/normalized_scatter_plot.py 0.225
 ```
 
+To save the plot:
+
+```bash
+python3 scripts/plotting/normalized_scatter_plot.py --output docs/images/normalized_scatter.png
+```
+
 The y-axis window is set using only terms within 1% of the previous running
 maximum. All residual points are still plotted, but points outside that window
 are clipped by the graph bounds.
 
 ## Drop Distribution
 
+![Drop distribution histogram](../../docs/images/drop_distribution.png)
+
 ```bash
 python3 scripts/plotting/drop_distribution.py
+```
+
+To save the plot:
+
+```bash
+python3 scripts/plotting/drop_distribution.py --output docs/images/drop_distribution.png
 ```
 
 For each term, this tracks the largest previous term and records:

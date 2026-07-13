@@ -2,6 +2,8 @@
 
 This repository generates terms of the **sequoia sequence**.
 
+![Direct scatter plot of the sequoia sequence](docs/images/direct_scatter.png)
+
 The name comes from a tree analogy. Each term represents one tree, and that tree puts out branches at evenly spaced heights. The term value is the height of the tree's lowest branch. The arithmetic progression generated from that term represents all branch heights on that tree.
 
 For tree `n`, the branch spacing is `n`, and the tree has `n` branches:
