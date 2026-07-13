@@ -95,14 +95,19 @@ The plot is a histogram with:
 - x-axis range from 0% to 200%
 - 1% bucket width
 - y-axis measured as percent of sequence terms
-- logarithmic y-axis
+- linear y-axis by default
 
 The dashed vertical line marks 100%.
+
+To use a logarithmic y-axis:
+
+```bash
+python3 scripts/plotting/drop_distribution.py --log
+```
 
 To save the plot:
 
 ```bash
 python3 scripts/plotting/drop_distribution.py --output docs/images/drop_distribution.png
 ```
-
 

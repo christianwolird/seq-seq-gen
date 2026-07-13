@@ -12,6 +12,11 @@ output_dpi = 150
 
 parser = argparse.ArgumentParser(description='Plot the running-maximum drop distribution.')
 parser.add_argument(
+    '--log',
+    action='store_true',
+    help='plot the y-axis on a logarithmic scale',
+)
+parser.add_argument(
     '--output',
     type=Path,
     help='save the plot to this file instead of opening a window',
@@ -61,8 +66,9 @@ ax.hist(
 
 ax.axvline(100, color='black', linewidth=0.8, linestyle='--')
 ax.set_xlim(min_percentage, max_percentage)
-ax.set_yscale('log')
-ax.yaxis.set_major_locator(FixedLocator([0.1, 1, 10]))
+if args.log:
+    ax.set_yscale('log')
+    ax.yaxis.set_major_locator(FixedLocator([0.1, 1, 10]))
 ax.yaxis.set_major_formatter(FuncFormatter(lambda y, _pos: f'{y:g}%'))
 ax.set_title('Distribution of Terms as Percent of Previous Running Maximum')
 ax.set_xlabel('Term as % of previous running maximum')
