@@ -15,8 +15,8 @@ parser.add_argument(
     'constant',
     nargs='?',
     type=float,
-    default=0.228,
-    help='constant c in c * n^3 / log(n); defaults to 0.228',
+    default=0.229,
+    help='constant c in c * n^3 / log(n); defaults to 0.229',
 )
 parser.add_argument(
     '--output',

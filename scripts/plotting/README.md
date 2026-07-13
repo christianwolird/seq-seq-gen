@@ -57,7 +57,7 @@ It would be nice to know why this normalization is so nicely wavy.
 The default constant is:
 
 ```text
-c = 0.228
+c = 0.229
 ```
 
 To provide a different constant:
