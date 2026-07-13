@@ -127,3 +127,8 @@ means `a(10) = 60`.
 └── results/              Generated sequence data
     └── backups/          Backups of previous generated data
 ```
+
+## More Documentation
+
+- [Plotting scripts](scripts/plotting/README.md)
+- [Benchmarks](tests/README.md)
