@@ -109,33 +109,10 @@ means `a(10) = 60`.
 ```text
 scripts/generate.py                  Main sequence generator
 scripts/plots/direct_scatter_plot.py Scatter plot helper with optional log scale
+scripts/plots/README.md              Plot script guide
+tests/README.md                      Benchmark guide and timing results
 tests/python_set_bench.py            Python set benchmark
 tests/rust/rust_bitmap_bench.rs      Rust bitmap benchmarks
 results/                             Generated sequence data
 results/backups/                     Backups of previous generated data
 ```
-
-## Timing Benchmarks
-
-Single-run benchmark timings on the author's desktop PC:
-
-All three benchmarked versions use the same greedy search; the difference is only how they store and check previously used branch heights.
-
-| Terms | Python set | Rust dense bitmap | Rust chunked bitmap |
-|---:|---:|---:|---:|
-| 32 | 0.0056s | 0.0002s | 0.0009s |
-| 64 | 0.0876s | 0.0031s | 0.0146s |
-| 128 | 1.8557s | 0.0458s | 0.2315s |
-| 256 | 40.6220s | 0.7996s | 5.8836s |
-| 512 | 1087.6581s | 17.2664s | 173.7632s |
-
-Transition scaling factors:
-
-The scaling table shows how much slower each method became when the requested term count doubled.
-
-| Transition | Python set | Rust dense bitmap | Rust chunked bitmap |
-|---:|---:|---:|---:|
-| 32 → 64 | 15.6x | 15.5x | 16.2x |
-| 64 → 128 | 21.2x | 14.8x | 15.9x |
-| 128 → 256 | 21.9x | 17.5x | 25.4x |
-| 256 → 512 | 26.8x | 21.6x | 29.5x |
