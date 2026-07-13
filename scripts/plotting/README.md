@@ -78,20 +78,17 @@ are clipped by the graph bounds.
 
 ## Drop Distribution
 
-For each term, this tracks the largest previous term and records:
-
-```text
-100 * a(n) / previous_running_max
-```
-
-Values below 100% are drops from the previous maximum. Values above 100% are new
-records.
+For each term, this tracks the largest previous term and records 
+`100 * a(n) / previous_max`
 
 ```bash
 python3 scripts/plotting/drop_distribution.py
 ```
 
 ![Drop distribution histogram](../../docs/images/drop_distribution.png)
+
+Values below 100% are drops from the previous maximum. Values above 100% are new
+records.
 
 The plot is a histogram with:
 
