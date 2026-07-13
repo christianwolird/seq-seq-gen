@@ -17,7 +17,7 @@ Run each script from the repository root.
 ## Direct Scatter Plot
 
 ```bash
-python3 scripts/plots/direct_scatter_plot.py
+python3 scripts/plotting/direct_scatter_plot.py
 ```
 
 Plots the sequence terms directly as `(n, a(n))`.
@@ -25,13 +25,13 @@ Plots the sequence terms directly as `(n, a(n))`.
 By default, both axes are linear. To use a log-log view:
 
 ```bash
-python3 scripts/plots/direct_scatter_plot.py --log
+python3 scripts/plotting/direct_scatter_plot.py --log
 ```
 
 ## Normalized Scatter Plot
 
 ```bash
-python3 scripts/plots/normalized_scatter_plot.py
+python3 scripts/plotting/normalized_scatter_plot.py
 ```
 
 Plots residuals after subtracting a conjectural growth term:
@@ -49,7 +49,7 @@ c = 0.228
 To provide a different constant:
 
 ```bash
-python3 scripts/plots/normalized_scatter_plot.py 0.225
+python3 scripts/plotting/normalized_scatter_plot.py 0.225
 ```
 
 The y-axis window is set using only terms within 1% of the previous running
@@ -59,7 +59,7 @@ are clipped by the graph bounds.
 ## Drop Distribution
 
 ```bash
-python3 scripts/plots/drop_distribution.py
+python3 scripts/plotting/drop_distribution.py
 ```
 
 For each term, this tracks the largest previous term and records:

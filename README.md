@@ -58,11 +58,12 @@ n = 5, a(5) = 8   →  8, 13, 18, 23, 28
 
 ## Goal
 
-The goal of this project is simple: generate more terms of the sequoia sequence.
+The goals of this project are simple:
 
-Implementation experiments are only a means to that end. Faster collision checks, lower memory usage, and alternative data structures are useful insofar as they help generate more terms correctly.
+1. Generate more terms of the sequoia sequence.
+2. Find patterns.
 
-The main reason to generate more terms is to look for interesting patterns. One current conjecture is that the sequence grows approximately like
+One current conjecture is that the sequence grows approximately like
 
 ```text
 n^3 / log(n)
@@ -70,9 +71,9 @@ n^3 / log(n)
 
 up to a constant factor.
 
-## Current Generator
+## Current Method
 
-The current generator is a straightforward greedy implementation.
+The current approach is a straightforward greedy algorithm.
 
 For each `n`, it tests candidate starting heights `x = 1, 2, 3, ...` until it finds one whose full arithmetic progression does not intersect the set of already used branch heights.
 
@@ -84,7 +85,16 @@ Run:
 python3 scripts/generate.py <target number of terms>
 ```
 
-The generated terms are written to:
+The generator prints progress updates to the terminal as it finds new
+terms. For example:
+
+```text
+Sequoia(2001) = 231621384  [16.1s]
+Sequoia(2002) = 242082158  [19.0s]
+Sequoia(2003) = 240326372  [17.0s]
+```
+
+The generated terms are also written to:
 
 ```text
 results/sequence.txt
@@ -107,12 +117,11 @@ means `a(10) = 60`.
 ## Repository Layout
 
 ```text
-scripts/generate.py                  Main sequence generator
-scripts/plots/direct_scatter_plot.py Scatter plot helper with optional log scale
-scripts/plots/README.md              Plot script guide
-tests/README.md                      Benchmark guide and timing results
-tests/python_set_bench.py            Python set benchmark
-tests/rust/rust_bitmap_bench.rs      Rust bitmap benchmarks
-results/                             Generated sequence data
-results/backups/                     Backups of previous generated data
+.
+├── scripts/
+│   ├── generate.py
+│   └── plotting/
+├── tests/
+└── results/
+    └── backups/
 ```
