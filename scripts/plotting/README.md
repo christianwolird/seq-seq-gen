@@ -20,13 +20,13 @@ created automatically. Saved images use a 16:9 1920x1080 canvas.
 
 ## Direct Scatter Plot
 
+Plots the sequence terms directly as `(n, a(n))`.
+
 ![Direct scatter plot](../../docs/images/direct_scatter.png)
 
 ```bash
 python3 scripts/plotting/direct_scatter_plot.py
 ```
-
-Plots the sequence terms directly as `(n, a(n))`.
 
 By default, both axes are linear. To use a log-log view:
 
@@ -45,17 +45,19 @@ python3 scripts/plotting/direct_scatter_plot.py --log --output docs/images/direc
 
 ## Normalized Scatter Plot
 
+Plots residuals after subtracting a conjectural growth term:
+
+```text
+a(n) - c * n^3 / log(n)
+```
+
 ![Normalized scatter plot](../../docs/images/normalized_scatter.png)
 
 ```bash
 python3 scripts/plotting/normalized_scatter_plot.py
 ```
 
-Plots residuals after subtracting a conjectural growth term:
-
-```text
-a(n) - c * n^3 / log(n)
-```
+It would be nice to know why this normalization is so nicely wavy.
 
 The default constant is:
 
@@ -81,18 +83,6 @@ are clipped by the graph bounds.
 
 ## Drop Distribution
 
-![Drop distribution histogram](../../docs/images/drop_distribution.png)
-
-```bash
-python3 scripts/plotting/drop_distribution.py
-```
-
-To save the plot:
-
-```bash
-python3 scripts/plotting/drop_distribution.py --output docs/images/drop_distribution.png
-```
-
 For each term, this tracks the largest previous term and records:
 
 ```text
@@ -102,6 +92,12 @@ For each term, this tracks the largest previous term and records:
 Values below 100% are drops from the previous maximum. Values above 100% are new
 records.
 
+![Drop distribution histogram](../../docs/images/drop_distribution.png)
+
+```bash
+python3 scripts/plotting/drop_distribution.py
+```
+
 The plot is a histogram with:
 
 - x-axis range from 0% to 200%
@@ -110,3 +106,11 @@ The plot is a histogram with:
 - logarithmic y-axis
 
 The dashed vertical line marks 100%.
+
+To save the plot:
+
+```bash
+python3 scripts/plotting/drop_distribution.py --output docs/images/drop_distribution.png
+```
+
+
