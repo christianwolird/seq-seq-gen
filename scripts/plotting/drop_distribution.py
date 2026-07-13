@@ -1,3 +1,4 @@
+import argparse
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -6,6 +7,16 @@ from matplotlib.ticker import FixedLocator, FuncFormatter
 
 repo_root = Path(__file__).resolve().parents[2]
 seq_file_name = repo_root / 'results' / 'sequence.txt'
+figure_size = (12.8, 7.2)
+output_dpi = 150
+
+parser = argparse.ArgumentParser(description='Plot the running-maximum drop distribution.')
+parser.add_argument(
+    '--output',
+    type=Path,
+    help='save the plot to this file instead of opening a window',
+)
+args = parser.parse_args()
 
 percentages = []
 running_max = None
@@ -30,7 +41,7 @@ with open(seq_file_name) as seq_file_read:
 
 print('Plotting...')
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=figure_size, constrained_layout=True)
 
 min_percentage = 0
 max_percentage = 200
@@ -57,4 +68,8 @@ ax.set_title('Distribution of Terms as Percent of Previous Running Maximum')
 ax.set_xlabel('Term as % of previous running maximum')
 ax.set_ylabel('% of terms')
 
-plt.show()
+if args.output:
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    plt.savefig(args.output, dpi=output_dpi)
+else:
+    plt.show()

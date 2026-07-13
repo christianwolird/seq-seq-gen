@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 
 repo_root = Path(__file__).resolve().parents[2]
 seq_file_name = repo_root / 'results' / 'sequence.txt'
+figure_size = (12.8, 7.2)
+output_dpi = 150
 
 parser = argparse.ArgumentParser(description='Plot normalized sequoia sequence residuals.')
 parser.add_argument(
@@ -15,6 +17,11 @@ parser.add_argument(
     type=float,
     default=0.228,
     help='constant c in c * n^3 / log(n); defaults to 0.228',
+)
+parser.add_argument(
+    '--output',
+    type=Path,
+    help='save the plot to this file instead of opening a window',
 )
 args = parser.parse_args()
 c = args.constant
@@ -70,10 +77,15 @@ print(f'Using c: {c:.12g}')
 print(f'Y-axis points: {len(y_axis_terms)} of {len(plot_terms)}')
 print('Plotting...')
 
+plt.figure(figsize=figure_size, constrained_layout=True)
 plt.scatter(plot_indices, residuals, s=3, c='blue')
 plt.axhline(0, color='black', linewidth=0.8)
 plt.ylim(min(y_axis_residuals), max(y_axis_residuals))
 plt.title(f'Sequoia Sequence Residuals: a(n) - {c:.6g} n^3 / log(n)')
 plt.xlabel('n')
 plt.ylabel('Residual')
-plt.show()
+if args.output:
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    plt.savefig(args.output, dpi=output_dpi)
+else:
+    plt.show()
