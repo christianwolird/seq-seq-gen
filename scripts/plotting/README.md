@@ -22,19 +22,19 @@ created automatically. Saved images use a 16:9 1920x1080 canvas.
 
 Plots the sequence terms directly as `(n, a(n))`.
 
-![Direct scatter plot](../../docs/images/direct_scatter.png)
-
 ```bash
 python3 scripts/plotting/direct_scatter_plot.py
 ```
 
-By default, both axes are linear. To use a log-log view:
+![Direct scatter plot](../../docs/images/direct_scatter.png)
 
-![Log-log direct scatter plot](../../docs/images/direct_scatter_log.png)
+By default, both axes are linear. To use a log-log view:
 
 ```bash
 python3 scripts/plotting/direct_scatter_plot.py --log
 ```
+
+![Log-log direct scatter plot](../../docs/images/direct_scatter_log.png)
 
 To save either version:
 
@@ -51,12 +51,11 @@ Plots residuals after subtracting a conjectural growth term:
 a(n) - c * n^3 / log(n)
 ```
 
-![Normalized scatter plot](../../docs/images/normalized_scatter.png)
-
 ```bash
 python3 scripts/plotting/normalized_scatter_plot.py
 ```
 
+![Normalized scatter plot](../../docs/images/normalized_scatter.png)
 It would be nice to know why this normalization is so nicely wavy.
 
 The default constant is:
@@ -92,11 +91,11 @@ For each term, this tracks the largest previous term and records:
 Values below 100% are drops from the previous maximum. Values above 100% are new
 records.
 
-![Drop distribution histogram](../../docs/images/drop_distribution.png)
-
 ```bash
 python3 scripts/plotting/drop_distribution.py
 ```
+
+![Drop distribution histogram](../../docs/images/drop_distribution.png)
 
 The plot is a histogram with:
 
