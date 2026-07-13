@@ -1,9 +1,19 @@
-import matplotlib.pyplot as plt
+import argparse
 from pathlib import Path
+
+import matplotlib.pyplot as plt
 
 
 repo_root = Path(__file__).resolve().parents[2]
 seq_file_name = repo_root / 'results' / 'sequence.txt'
+
+parser = argparse.ArgumentParser(description='Plot the sequoia sequence.')
+parser.add_argument(
+    '--log',
+    action='store_true',
+    help='plot both axes on a logarithmic scale',
+)
+args = parser.parse_args()
 
 seq = []
 indices = []
@@ -25,7 +35,8 @@ print('Plotting...')
 plt.scatter(indices, seq, s=3, c='blue')
 plt.title('Sequoia Sequence')
 
-plt.xscale('log')
-plt.yscale('log')
+if args.log:
+    plt.xscale('log')
+    plt.yscale('log')
 
 plt.show()

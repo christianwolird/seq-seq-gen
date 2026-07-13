@@ -108,8 +108,7 @@ means `a(10) = 60`.
 
 ```text
 scripts/generate.py                  Main sequence generator
-scripts/plots/scatter_plot.py        Scatter plot helper
-scripts/plots/log_scatter_plot.py    Log scatter plot helper
+scripts/plots/direct_scatter_plot.py Scatter plot helper with optional log scale
 tests/python_set_bench.py            Python set benchmark
 tests/rust/rust_bitmap_bench.rs      Rust bitmap benchmarks
 results/                             Generated sequence data
