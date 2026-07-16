@@ -12,21 +12,21 @@ Single-run benchmark timings on the author's desktop PC:
 
 | Terms | Python set | Rust chunked bitmap | Rust dense bitmap | Rust dense modular buckets |
 |---:|---:|---:|---:|---:|
-| 32 | 0.0056s | 0.0009s | 0.0002s | 0.0001s |
-| 64 | 0.0876s | 0.0146s | 0.0031s | 0.0003s |
-| 128 | 1.8557s | 0.2315s | 0.0458s | 0.0020s |
-| 256 | 40.6220s | 5.8836s | 0.7996s | 0.0174s |
-| 512 | 1087.6581s | 173.7632s | 17.2664s | 0.2395s |
+| 32 | 0.0056s | 0.0009s | 0.0002s | 0.0000s |
+| 64 | 0.0876s | 0.0146s | 0.0031s | 0.0001s |
+| 128 | 1.8557s | 0.2315s | 0.0458s | 0.0008s |
+| 256 | 40.6220s | 5.8836s | 0.7996s | 0.0065s |
+| 512 | 1087.6581s | 173.7632s | 17.2664s | 0.0669s |
 
 The scaling table shows how much slower each method became when the requested
 term count doubled.
 
 | Transition | Python set | Rust chunked bitmap | Rust dense bitmap | Rust dense modular buckets |
 |---:|---:|---:|---:|---:|
-| 32 -> 64 | 15.6x | 16.2x | 15.5x | 3.0x |
-| 64 -> 128 | 21.2x | 15.9x | 14.8x | 6.7x |
-| 128 -> 256 | 21.9x | 25.4x | 17.5x | 8.7x |
-| 256 -> 512 | 26.8x | 29.5x | 21.6x | 13.8x |
+| 32 -> 64 | 15.6x | 16.2x | 15.5x | 4.8x |
+| 64 -> 128 | 21.2x | 15.9x | 14.8x | 7.5x |
+| 128 -> 256 | 21.9x | 25.4x | 17.5x | 8.2x |
+| 256 -> 512 | 26.8x | 29.5x | 21.6x | 10.4x |
 
 ## Implementations
 
