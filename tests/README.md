@@ -7,6 +7,15 @@ All benchmarked versions generate the same sequence. The framework comparison
 uses the same naive incremental search and varies only how previously used
 branch heights are stored and checked.
 
+The Python benchmark uses a plain `set` for branch-height membership checks.
+The Rust framework benchmark compares two bitmap representations: `dense`, a
+single growing `Vec<u64>`, and `chunked`, a `HashMap` whose values are `u64`
+bitmap words. The algorithm comparison uses dense Rust bitmaps for both
+algorithms, comparing naive incremental search with modular jumping.
+
+The current generator uses the dense Rust modular bucket approach because it is
+the fastest of these measured implementations for the tested term counts.
+
 ## Framework Comparison
 
 Single-run benchmark timings on the author's desktop PC:
@@ -94,17 +103,3 @@ To verify that both algorithms produce the same terms:
 ```bash
 tests/algorithm_comparison/rust_modular_bucket_bench 100 check
 ```
-
-## Implementations
-
-The Python benchmark uses a plain `set` for branch-height membership checks.
-This is simple and useful as a correctness-oriented baseline, but it becomes
-slow quickly as the number of generated terms grows.
-
-The Rust benchmark compares two bitmap representations:
-
-- `dense`: one growing `Vec<u64>`
-- `chunked`: a `HashMap` whose values are `u64` bitmap words
-
-The current generator uses the dense Rust modular bucket approach because it is
-the fastest of these measured implementations for the tested term counts.
