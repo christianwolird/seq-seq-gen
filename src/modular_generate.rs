@@ -90,11 +90,48 @@ fn append_term(file: &mut File, n: usize, x: usize) -> std::io::Result<()> {
     Ok(())
 }
 
+fn first_candidate_in_bucket(n: usize, residue: usize) -> usize {
+    if residue == 0 {
+        n
+    } else {
+        residue
+    }
+}
+
+fn find_modular_term(used_words: &[u64], n: usize) -> usize {
+    let mut best = usize::MAX;
+
+    for residue in 0..n {
+        let mut x = first_candidate_in_bucket(n, residue);
+
+        while x < best {
+            let mut colliding_k = None;
+
+            for k in (0..n).rev() {
+                if dense_get(used_words, x + k * n) {
+                    colliding_k = Some(k);
+                    break;
+                }
+            }
+
+            match colliding_k {
+                Some(k) => x += (k + 1) * n,
+                None => {
+                    best = x;
+                    break;
+                }
+            }
+        }
+    }
+
+    best
+}
+
 fn main() -> std::io::Result<()> {
     let args: Vec<String> = env::args().collect();
 
     if args.len() != 2 {
-        eprintln!("Usage: dense_bitmap_generate <target number of terms>");
+        eprintln!("Usage: modular_generate <target number of terms>");
         std::process::exit(1);
     }
 
@@ -138,30 +175,13 @@ fn main() -> std::io::Result<()> {
 
     for n in (loaded_terms + 1)..=target_terms {
         let term_start = Instant::now();
-        let mut x = 1_usize;
+        let x = find_modular_term(&used_words, n);
 
-        loop {
-            let mut collision = false;
+        mark_progression(&mut used_words, n, x);
+        append_term(&mut file, n, x)?;
 
-            for k in 0..n {
-                if dense_get(&used_words, x + k * n) {
-                    collision = true;
-                    break;
-                }
-            }
-
-            if collision {
-                x += 1;
-                continue;
-            }
-
-            mark_progression(&mut used_words, n, x);
-            append_term(&mut file, n, x)?;
-
-            let seconds = term_start.elapsed().as_secs_f64();
-            println!("Sequoia({n}) = {x}  [{seconds:.1}s]");
-            break;
-        }
+        let seconds = term_start.elapsed().as_secs_f64();
+        println!("Sequoia({n}) = {x}  [{seconds:.1}s]");
     }
 
     println!("Done.");

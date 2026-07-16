@@ -39,8 +39,8 @@ The Rust benchmark compares two bitmap representations:
 - `dense`: one growing `Vec<u64>`
 - `chunked`: a `HashMap` whose values are `u64` bitmap words
 
-The current generator uses the dense Rust bitmap approach because it is the
-fastest of these measured implementations for the tested term counts.
+The current generator uses the dense Rust modular bucket approach because it is
+the fastest of these measured implementations for the tested term counts.
 
 ## Running Benchmarks
 

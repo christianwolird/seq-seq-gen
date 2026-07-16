@@ -75,11 +75,19 @@ up to a constant factor.
 
 ## Current Method
 
-The current approach is a straightforward greedy algorithm.
+The current approach is still a greedy algorithm, but it searches candidates by
+modular bucket.
 
-For each `n`, it tests candidate starting heights `x = 1, 2, 3, ...` until it finds one whose full arithmetic progression does not intersect the set of already used branch heights.
+For each `n`, it first tests candidate starting heights congruent to `0 mod n`,
+then `1 mod n`, then `2 mod n`, and so on. Within a bucket, it checks the
+candidate's arithmetic progression from largest height to smallest. If
+`x + kn` is already used, then `x`, `x + n`, ..., `x + kn` cannot be valid
+starting heights in that bucket, so the search jumps directly to
+`x + (k + 1)n`.
 
-The `scripts/generate.py` entry point compiles and runs a Rust dense-bitmap generator. Used branch heights are stored in a growing `Vec<u64>` bitmap, which keeps collision checks fast while preserving the same greedy search.
+The `scripts/generate.py` entry point compiles and runs the Rust modular
+dense-bitmap generator. Used branch heights are stored in a growing `Vec<u64>`
+bitmap.
 
 Run:
 

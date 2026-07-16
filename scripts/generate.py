@@ -10,9 +10,9 @@ if len(sys.argv) != 2:
     sys.exit(1)
 
 repo_root = Path(__file__).resolve().parent.parent
-src_file = repo_root / "src" / "dense_bitmap_generate.rs"
+src_file = repo_root / "src" / "modular_generate.rs"
 bin_dir = repo_root / "target"
-bin_file = bin_dir / "dense_bitmap_generate"
+bin_file = bin_dir / "modular_generate"
 
 bin_dir.mkdir(parents=True, exist_ok=True)
 
