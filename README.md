@@ -135,7 +135,7 @@ means `a(10) = 60`.
 │   └── plotting/         Various plotting scripts
 ├── tests/                Rust vs Python benchmark scripts
 └── results/              Generated sequence data
-    └── backups/          Backups of previous generated data
+    └── sequence.txt      Generated sequence terms
 ```
 
 ## More Documentation
