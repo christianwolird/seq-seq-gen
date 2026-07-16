@@ -1,2 +1,6 @@
 *.log
 target/
+__pycache__/
+*/__pycache__/
+tests/framework_comparison/rust_bitmap_bench
+tests/algorithm_comparison/rust_modular_bucket_bench

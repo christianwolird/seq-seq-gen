@@ -26,7 +26,7 @@ def generate(num_terms):
 
 
 if len(sys.argv) != 2:
-    print("Usage: python tests/python_set_bench.py <term count>")
+    print("Usage: python tests/framework_comparison/python_set_bench.py <term count>")
     sys.exit(1)
 
 num_terms = int(sys.argv[1])
