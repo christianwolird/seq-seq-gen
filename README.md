@@ -147,6 +147,7 @@ means `a(10) = 60`.
 │   ├── README.md
 │   │
 │   ├── algorithm_comparison/
+│   │   ├── modular_multithread_bench.rs Multithreaded modular benchmark
 │   │   └── rust_modular_bucket_bench.rs Modular jumping benchmark
 │   │
 │   └── framework_comparison/            Framework and bitmap benchmarks

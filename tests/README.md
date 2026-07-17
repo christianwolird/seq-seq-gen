@@ -92,14 +92,33 @@ Compile the modular jumping benchmark with:
 rustc -O tests/algorithm_comparison/rust_modular_bucket_bench.rs -o tests/algorithm_comparison/rust_modular_bucket_bench
 ```
 
+Compile the multithreaded modular jumping benchmark with:
+
+```bash
+rustc -O tests/algorithm_comparison/modular_multithread_bench.rs -o tests/algorithm_comparison/modular_multithread_bench
+```
+
 Then compare the naive incremental dense bitmap search with modular jumping:
 
 ```bash
 tests/algorithm_comparison/rust_modular_bucket_bench 100
 ```
 
+Run the multithreaded modular jumping benchmark with a fixed worker count:
+
+```bash
+tests/algorithm_comparison/modular_multithread_bench 100 4
+```
+
 To verify that both algorithms produce the same terms:
 
 ```bash
 tests/algorithm_comparison/rust_modular_bucket_bench 100 check
+```
+
+To verify that multithreaded modular jumping matches single-threaded modular
+jumping:
+
+```bash
+tests/algorithm_comparison/modular_multithread_bench 100 4 check
 ```
