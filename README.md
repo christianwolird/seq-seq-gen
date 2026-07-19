@@ -147,12 +147,13 @@ means `a(10) = 60`.
 │   ├── README.md
 │   │
 │   ├── algorithm_comparison/
-│   │   ├── modular_multithread_bench.rs Multithreaded modular benchmark
-│   │   └── rust_modular_bucket_bench.rs Modular jumping benchmark
+│   │   ├── modular_jumping_bench.rs     Modular jumping benchmark
+│   │   └── multithreaded_modular_jumping_bench.rs Multithreaded modular benchmark
 │   │
 │   └── framework_comparison/            Framework and bitmap benchmarks
 │       ├── python_set_bench.py          Python set benchmark
-│       └── rust_bitmap_bench.rs         Rust bitmap benchmark
+│       ├── rust_chunked_bitmap_bench.rs Chunked Rust bitmap benchmark
+│       └── rust_dense_bitmap_bench.rs   Dense Rust bitmap benchmark
 │
 └── results/
     └── sequence.txt                     Generated sequence terms
