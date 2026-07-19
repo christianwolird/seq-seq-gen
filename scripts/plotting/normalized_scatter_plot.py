@@ -15,7 +15,7 @@ parser.add_argument(
     'constant',
     nargs='?',
     type=float,
-    default=0.229,
+    default=0.2255,
     help='constant c in c * n^3 / log(n); defaults to 0.229',
 )
 parser.add_argument(
@@ -47,8 +47,8 @@ plot_model_values = []
 y_axis_terms = []
 y_axis_model_values = []
 running_max = None
-min_y_axis_percentage = 99
-max_y_axis_percentage = 101
+min_y_axis_percentage = 99.7
+max_y_axis_percentage = 101.5
 
 for n, x in zip(indices, seq):
     previous_running_max = running_max

@@ -52,18 +52,15 @@ python3 scripts/plotting/normalized_scatter_plot.py
 ```
 
 ![Normalized scatter plot](../../docs/images/normalized_scatter.png)
-It would be nice to know why this normalization is so nicely wavy.
-
-The default constant is:
 
 ```text
-c = 0.229
+c = 0.2255
 ```
 
 To provide a different constant:
 
 ```bash
-python3 scripts/plotting/normalized_scatter_plot.py 0.225
+python3 scripts/plotting/normalized_scatter_plot.py 0.224
 ```
 
 To save the plot:
@@ -72,7 +69,7 @@ To save the plot:
 python3 scripts/plotting/normalized_scatter_plot.py --output docs/images/normalized_scatter.png
 ```
 
-The y-axis window is set using only terms within 1% of the previous running
+The y-axis window is set using only terms near the previous running
 maximum. All residual points are still plotted, but points outside that window
 are clipped by the graph bounds.
 
