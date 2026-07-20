@@ -161,5 +161,5 @@ means `a(10) = 60`.
 
 ## More Documentation
 
-- [Plotting scripts](scripts/plotting/README.md)
+- [Plotting](scripts/plotting/README.md)
 - [Benchmarks](tests/README.md)

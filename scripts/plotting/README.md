@@ -1,4 +1,4 @@
-# Plotting Scripts
+# Plotting
 
 These scripts read the sequoia sequence from:
 
@@ -108,3 +108,9 @@ To save the plot:
 python3 scripts/plotting/drop_distribution.py --output docs/images/drop_distribution.png
 ```
 
+## Observations
+
+The sequence's "frontier" terms oddly split into two distinct bands at various
+points.
+
+![Frontier terms splitting into two bands](../../docs/images/split_canopy.png)
