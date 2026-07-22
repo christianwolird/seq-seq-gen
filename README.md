@@ -145,15 +145,8 @@ means `a(10) = 60`.
 │
 ├── tests/
 │   ├── README.md
-│   │
-│   ├── algorithm_comparison/
-│   │   ├── modular_jumping_bench.rs     Modular jumping benchmark
-│   │   └── multithreaded_modular_jumping_bench.rs Multithreaded modular benchmark
-│   │
-│   └── framework_comparison/            Framework and bitmap benchmarks
-│       ├── python_set_bench.py          Python set benchmark
-│       ├── rust_chunked_bitmap_bench.rs Chunked Rust bitmap benchmark
-│       └── rust_dense_bitmap_bench.rs   Dense Rust bitmap benchmark
+│   ├── algorithm_comparison/            Incremental vs modular benchmarks
+│   └── framework_comparison/            Python vs Rust benchmarks mostly
 │
 └── results/
     └── sequence.txt                     Generated sequence terms

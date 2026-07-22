@@ -94,6 +94,13 @@ Compile the multithreaded modular jumping benchmark with:
 rustc -O tests/algorithm_comparison/multithreaded_modular_jumping_bench.rs -o tests/algorithm_comparison/multithreaded_modular_jumping_bench
 ```
 
+Compile the clumped multithreaded benchmark, which assigns 100 modular buckets
+per worker job, with:
+
+```bash
+rustc -O tests/algorithm_comparison/clumped_multithreaded_modular_jumping_bench.rs -o tests/algorithm_comparison/clumped_multithreaded_modular_jumping_bench
+```
+
 Run the modular jumping benchmark:
 
 ```bash
@@ -104,4 +111,10 @@ Run the multithreaded modular jumping benchmark with a fixed worker count:
 
 ```bash
 tests/algorithm_comparison/multithreaded_modular_jumping_bench 100 4
+```
+
+Run the clumped multithreaded benchmark with a fixed worker count:
+
+```bash
+tests/algorithm_comparison/clumped_multithreaded_modular_jumping_bench 100 4
 ```

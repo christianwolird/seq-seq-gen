@@ -3,5 +3,6 @@ target/
 __pycache__/
 */__pycache__/
 tests/framework_comparison/rust_bitmap_bench
-tests/algorithm_comparison/rust_modular_bucket_bench
-tests/algorithm_comparison/modular_multithread_bench
+tests/algorithm_comparison/modular_jumping_bench
+tests/algorithm_comparison/multithreaded_modular_jumping_bench
+tests/algorithm_comparison/clumped_multithreaded_modular_jumping_bench
