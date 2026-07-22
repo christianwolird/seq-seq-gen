@@ -12,7 +12,7 @@ figure_size = (12.8, 7.2)
 output_dpi = 150
 
 
-def scatter_canopy(ax, indices, terms, log_scale):
+def scatter_canopy(ax, indices, terms, log_scale, include_terms=True):
     """Rasterize every sequence and additional branch point as one pixel."""
     # Drawing once establishes the axes' final pixel bounds after constrained layout.
     ax.figure.canvas.draw()
@@ -39,22 +39,23 @@ def scatter_canopy(ax, indices, terms, log_scale):
         if 0 <= pixel_x < width:
             canopy[pixel_y[visible], pixel_x] = (255, 0, 0, 255)
 
-    # Write sequence terms last so their individual blue pixels remain visible.
-    plot_x = np.log(indices) if log_scale else np.asarray(indices)
-    plot_y = np.log(terms) if log_scale else np.asarray(terms)
-    pixel_x = np.rint(
-        (plot_x - x_min) * (width - 1) / (x_max - x_min)
-    ).astype(np.intp)
-    pixel_y = np.rint(
-        (plot_y - y_min) * (height - 1) / (y_max - y_min)
-    ).astype(np.intp)
-    visible = (
-        (pixel_x >= 0)
-        & (pixel_x < width)
-        & (pixel_y >= 0)
-        & (pixel_y < height)
-    )
-    canopy[pixel_y[visible], pixel_x[visible]] = (0, 0, 255, 255)
+    if include_terms:
+        # Write sequence terms last so their blue pixels remain visible.
+        plot_x = np.log(indices) if log_scale else np.asarray(indices)
+        plot_y = np.log(terms) if log_scale else np.asarray(terms)
+        pixel_x = np.rint(
+            (plot_x - x_min) * (width - 1) / (x_max - x_min)
+        ).astype(np.intp)
+        pixel_y = np.rint(
+            (plot_y - y_min) * (height - 1) / (y_max - y_min)
+        ).astype(np.intp)
+        visible = (
+            (pixel_x >= 0)
+            & (pixel_x < width)
+            & (pixel_y >= 0)
+            & (pixel_y < height)
+        )
+        canopy[pixel_y[visible], pixel_x[visible]] = (0, 0, 255, 255)
 
     ax.imshow(
         canopy,
@@ -65,6 +66,24 @@ def scatter_canopy(ax, indices, terms, log_scale):
         aspect='auto',
         zorder=1,
     )
+
+
+def save_with_blue_pixels(figure, ax, indices, terms, output):
+    """Write sequence terms directly into the final PNG pixel buffer."""
+    figure.canvas.draw()
+    pixels = np.asarray(figure.canvas.buffer_rgba()).copy()
+    display_points = ax.transData.transform(np.column_stack((indices, terms)))
+    pixel_x = np.rint(display_points[:, 0]).astype(np.intp)
+    # Matplotlib display coordinates start at the bottom; the image starts at top.
+    pixel_y = pixels.shape[0] - 1 - np.rint(display_points[:, 1]).astype(np.intp)
+    visible = (
+        (pixel_x >= 0)
+        & (pixel_x < pixels.shape[1])
+        & (pixel_y >= 0)
+        & (pixel_y < pixels.shape[0])
+    )
+    pixels[pixel_y[visible], pixel_x[visible]] = (0, 0, 255, 255)
+    plt.imsave(output, pixels)
 
 
 def main():
@@ -112,12 +131,13 @@ def main():
         ax.set_xscale('log')
         ax.set_yscale('log')
 
-    scatter_canopy(ax, indices, seq, args.log)
+    # For saved plots, blue terms are applied directly to the final PNG below.
+    scatter_canopy(ax, indices, seq, args.log, include_terms=args.output is None)
     ax.set_title('Sequoia Sequence Full Canopy')
 
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        figure.savefig(args.output, dpi=output_dpi)
+        save_with_blue_pixels(figure, ax, indices, seq, args.output)
     else:
         plt.show()
 
