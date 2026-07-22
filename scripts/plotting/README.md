@@ -96,6 +96,32 @@ The y-axis window is set using only terms near the previous running
 maximum. All residual points are still plotted, but points outside that window
 are clipped by the graph bounds.
 
+## Canopy Density
+
+Counts occupied canopy heights in the intervals `1–1000`, `1001–2000`, and so
+on, then plots each count as a percentage of the 1,000 available heights. Pass
+the number of sequence terms to include as an optional argument.
+
+```bash
+python3 scripts/plotting/canopy_density.py 2000
+python3 scripts/plotting/canopy_density.py 16000
+```
+
+![Canopy density for 2,000 terms](../../docs/images/canopy_density_2000.png)
+
+![Canopy density for 16,000 terms](../../docs/images/canopy_density_16000.png)
+
+To save the plots:
+
+```bash
+python3 scripts/plotting/canopy_density.py 2000 --output docs/images/canopy_density_2000.png
+python3 scripts/plotting/canopy_density.py 16000 --output docs/images/canopy_density_16000.png
+```
+
+When there are more intervals than horizontal output pixels, adjacent interval
+percentages are averaged into display bars. Every canopy point is still counted
+in its exact 1,000-height interval before this display-only aggregation.
+
 ## Drop Distribution
 
 For each term, this tracks the largest previous term and records 
