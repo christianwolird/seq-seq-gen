@@ -91,6 +91,12 @@ def main():
         description='Plot the sequoia sequence and every branch in its full canopy.'
     )
     parser.add_argument(
+        'terms',
+        nargs='?',
+        type=int,
+        help='number of sequence terms to include; defaults to all available terms',
+    )
+    parser.add_argument(
         '--log',
         action='store_true',
         help='plot both axes on a logarithmic scale',
@@ -101,6 +107,8 @@ def main():
         help='save the plot to this file instead of opening a window',
     )
     args = parser.parse_args()
+    if args.terms is not None and args.terms < 1:
+        parser.error('terms must be a positive integer')
 
     seq = []
     indices = []
@@ -113,8 +121,17 @@ def main():
             n, x = line.strip().split()
             n, x = int(n), int(x)
 
+            if args.terms is not None and n > args.terms:
+                break
+
             indices.append(n)
             seq.append(x)
+
+    if args.terms is not None and len(indices) < args.terms:
+        raise ValueError(
+            f'Requested {args.terms} terms, but {seq_file_name} contains only '
+            f'{len(indices)}.'
+        )
 
     print('Plotting full canopy...')
 
@@ -133,7 +150,7 @@ def main():
 
     # For saved plots, blue terms are applied directly to the final PNG below.
     scatter_canopy(ax, indices, seq, args.log, include_terms=args.output is None)
-    ax.set_title('Sequoia Sequence Full Canopy')
+    ax.set_title(f'Sequoia Sequence Full Canopy: First {len(indices):,} Terms')
 
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)

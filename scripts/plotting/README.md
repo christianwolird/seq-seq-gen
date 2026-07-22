@@ -54,6 +54,14 @@ python3 scripts/plotting/full_canopy_scatter.py
 
 ![Full canopy scatter plot](../../docs/images/full_canopy_scatter.png)
 
+Pass a term count to plot only that initial portion of the canopy:
+
+```bash
+python3 scripts/plotting/full_canopy_scatter.py 2000
+```
+
+![Full canopy scatter plot for 2,000 terms](../../docs/images/full_canopy_scatter_2000.png)
+
 The plot is rasterized at the output resolution so the complete set of branch
 points can be displayed without retaining every marker in memory. Every red
 branch point and blue sequence term is drawn as an individual pixel, with blue
@@ -64,6 +72,7 @@ The script also supports logarithmic axes and saving to a file:
 ```bash
 python3 scripts/plotting/full_canopy_scatter.py --log
 python3 scripts/plotting/full_canopy_scatter.py --output docs/images/full_canopy_scatter.png
+python3 scripts/plotting/full_canopy_scatter.py 2000 --output docs/images/full_canopy_scatter_2000.png
 ```
 
 ## Normalized Scatter Plot
