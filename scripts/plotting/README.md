@@ -54,9 +54,10 @@ python3 scripts/plotting/full_canopy_scatter.py
 
 ![Full canopy scatter plot](../../docs/images/full_canopy_scatter.png)
 
-The canopy layer is rasterized at the output resolution so the complete set of
-branch points can be displayed without retaining every marker in memory. The
-blue sequence terms are drawn on top of it as ordinary scatter points.
+The plot is rasterized at the output resolution so the complete set of branch
+points can be displayed without retaining every marker in memory. Every red
+branch point and blue sequence term is drawn as an individual pixel, with blue
+pixels written last so the sequence terms remain visible.
 
 The script also supports logarithmic axes and saving to a file:
 

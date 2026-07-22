@@ -13,7 +13,7 @@ output_dpi = 150
 
 
 def scatter_canopy(ax, indices, terms, log_scale):
-    """Rasterize every additional branch point at the output resolution."""
+    """Rasterize every sequence and additional branch point as one pixel."""
     # Drawing once establishes the axes' final pixel bounds after constrained layout.
     ax.figure.canvas.draw()
     bounds = ax.get_window_extent()
@@ -38,6 +38,23 @@ def scatter_canopy(ax, indices, terms, log_scale):
         visible = (pixel_y >= 0) & (pixel_y < height)
         if 0 <= pixel_x < width:
             canopy[pixel_y[visible], pixel_x] = (255, 0, 0, 255)
+
+    # Write sequence terms last so their individual blue pixels remain visible.
+    plot_x = np.log(indices) if log_scale else np.asarray(indices)
+    plot_y = np.log(terms) if log_scale else np.asarray(terms)
+    pixel_x = np.rint(
+        (plot_x - x_min) * (width - 1) / (x_max - x_min)
+    ).astype(np.intp)
+    pixel_y = np.rint(
+        (plot_y - y_min) * (height - 1) / (y_max - y_min)
+    ).astype(np.intp)
+    visible = (
+        (pixel_x >= 0)
+        & (pixel_x < width)
+        & (pixel_y >= 0)
+        & (pixel_y < height)
+    )
+    canopy[pixel_y[visible], pixel_x[visible]] = (0, 0, 255, 255)
 
     ax.imshow(
         canopy,
@@ -96,8 +113,6 @@ def main():
         ax.set_yscale('log')
 
     scatter_canopy(ax, indices, seq, args.log)
-    # Plot sequence terms last so the blue points remain visible.
-    ax.scatter(indices, seq, s=3, c='blue', zorder=2)
     ax.set_title('Sequoia Sequence Full Canopy')
 
     if args.output:
