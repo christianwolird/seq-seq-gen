@@ -43,6 +43,28 @@ python3 scripts/plotting/direct_scatter_plot.py --output docs/images/direct_scat
 python3 scripts/plotting/direct_scatter_plot.py --log --output docs/images/direct_scatter_log.png
 ```
 
+## Full Canopy Scatter Plot
+
+Plots the sequence terms `(n, a(n))` in blue and every additional branch height
+`(n, a(n) + kn)`, for `1 <= k < n`, in red.
+
+```bash
+python3 scripts/plotting/full_canopy_scatter.py
+```
+
+![Full canopy scatter plot](../../docs/images/full_canopy_scatter.png)
+
+The canopy layer is rasterized at the output resolution so the complete set of
+branch points can be displayed without retaining every marker in memory. The
+blue sequence terms are drawn on top of it as ordinary scatter points.
+
+The script also supports logarithmic axes and saving to a file:
+
+```bash
+python3 scripts/plotting/full_canopy_scatter.py --log
+python3 scripts/plotting/full_canopy_scatter.py --output docs/images/full_canopy_scatter.png
+```
+
 ## Normalized Scatter Plot
 
 Plots residuals after subtracting a conjectural growth term `a(n) - c * n^3 / log(n)`
